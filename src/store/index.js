@@ -16,6 +16,12 @@ export default new Vuex.Store({
     ADD_NOTE: (state, payload) => {
       state.notes.push(payload);
     },
+    UPDATE_NOTE: (state, payload) => {
+      const index = state.notes.findIndex((note) => note.id === payload.id);
+      if (index !== -1) {
+        state.notes.splice(index, 1, payload);
+      }
+    },
     DELETE_NOTE: (state, noteId) =>
       (state.notes = state.notes.filter((note) => note.id !== noteId)),
     SET_THEME: (state, theme) => (state.theme = theme),
@@ -34,6 +40,11 @@ export default new Vuex.Store({
         JSON.stringify([...state.notes, payload])
       );
       commit("ADD_NOTE", payload);
+    },
+    async updateNote({ state, commit }, payload) {
+      commit("UPDATE_NOTE", payload);
+      // updating local storage
+      localStorage.setItem("notes", JSON.stringify([...state.notes]));
     },
     async deleteNote({ state, commit }, noteId) {
       await commit("DELETE_NOTE", noteId);

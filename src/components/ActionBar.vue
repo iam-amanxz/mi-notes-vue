@@ -2,15 +2,12 @@
   <div class="actionBar">
     <div v-if="isModalOpen" class="backdrop--overlay"></div>
     <!-- Filterbar -->
+    <!-- <FilterBar /> -->
     <div class="filterBar"></div>
     <!-- Add Button -->
     <!-- TODO: Add an icon -->
-    <button
-      class="addButton"
-      :style="{ color: `${theme.primary}` }"
-      @click="showAddModal"
-    >
-      Add a note
+    <button class="addButton" :style="{ color: `${theme.primary}` }" @click="showAddModal">
+      <Plus class="addButton__icon" />Add a note
     </button>
     <modal
       styles="padding: 20px 40px"
@@ -21,12 +18,11 @@
       width="90%"
       :adaptive="true"
     >
-      <h3 class="modal__title" :style="{ color: `${theme.primary}` }">
-        Create a note
-      </h3>
+      <h3 class="modal__title" :style="{ color: `${theme.primary}` }">Create a note</h3>
       <form class="form" @submit.prevent="onSubmitForm">
         <input
           v-model="title"
+          required
           placeholder="Title..."
           type="text"
           class="form__title formInput"
@@ -34,6 +30,7 @@
         />
         <textarea
           v-model="description"
+          required
           placeholder="Description..."
           cols="10"
           rows="3"
@@ -46,9 +43,7 @@
             type="submit"
             class="btn--submit formBtn"
             :style="{ background: `${theme.primary}` }"
-          >
-            Create
-          </button>
+          >Create</button>
         </div>
       </form>
     </modal>
@@ -56,8 +51,11 @@
 </template>
 
 <script>
+import FilterBar from "@/components/FilterBar";
+import Plus from "vue-material-design-icons/Plus";
 import { v4 as uuidv4 } from "uuid";
 export default {
+  components: { FilterBar, Plus },
   data: () => ({
     title: "",
     description: "",
@@ -93,8 +91,6 @@ export default {
         this.isModalOpen = false;
         (this.title = ""), (this.description = ""), this.$modal.hide("addNote");
       } else {
-        // TODO: Validation required
-        console.log("please fill all the fields");
         this.loading = true;
         this.isModalOpen = false;
       }
@@ -103,22 +99,22 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .backdrop--overlay {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
+  // background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(4px);
 }
 
 .actionBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .addButton {
@@ -129,9 +125,22 @@ export default {
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    margin-right: 15px;
+  }
 
   &:hover {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .addButton {
+    width: 100%;
   }
 }
 

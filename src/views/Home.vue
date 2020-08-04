@@ -9,8 +9,6 @@
     <!-- Navbar -->
     <Navbar />
     <div class="home__container">
-      <!-- Searchbar -->
-
       <!-- Actionbar (Filterbar && Add Button)-->
       <ActionBar />
 
