@@ -1,8 +1,10 @@
 <template>
   <div class="actionBar">
+    <div v-if="isModalOpen" class="backdrop--overlay"></div>
     <!-- Filterbar -->
     <div class="filterBar"></div>
     <!-- Add Button -->
+    <!-- TODO: Add an icon -->
     <button
       class="addButton"
       :style="{ color: `${theme.primary}` }"
@@ -13,8 +15,10 @@
     <modal
       styles="padding: 20px 40px"
       class="addNoteModal"
+      :clickToClose="false"
       name="addNote"
       :max-width="500"
+      width="90%"
       :adaptive="true"
     >
       <h3 class="modal__title" :style="{ color: `${theme.primary}` }">
@@ -37,7 +41,7 @@
           :style="{ borderColor: `${theme.primary}` }"
         ></textarea>
         <div class="form__actions">
-          <button class="btn--close formBtn">Cancel</button>
+          <button class="btn--close formBtn" @click="hideModal">Cancel</button>
           <button
             type="submit"
             class="btn--submit formBtn"
@@ -58,6 +62,7 @@ export default {
     title: "",
     description: "",
     isLoading: false,
+    isModalOpen: false,
   }),
   computed: {
     theme() {
@@ -67,6 +72,11 @@ export default {
   methods: {
     showAddModal() {
       this.$modal.show("addNote");
+      this.isModalOpen = true;
+    },
+    hideModal() {
+      this.$modal.hide("addNote");
+      this.isModalOpen = false;
     },
     onSubmitForm() {
       this.loading = true;
@@ -79,8 +89,14 @@ export default {
         };
 
         this.$store.dispatch("addNote", note);
+        this.loading = false;
+        this.isModalOpen = false;
+        (this.title = ""), (this.description = ""), this.$modal.hide("addNote");
       } else {
+        // TODO: Validation required
         console.log("please fill all the fields");
+        this.loading = true;
+        this.isModalOpen = false;
       }
     },
   },
@@ -88,6 +104,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.backdrop--overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
 .actionBar {
   display: flex;
   justify-content: space-between;

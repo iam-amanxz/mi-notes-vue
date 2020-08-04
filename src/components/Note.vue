@@ -5,7 +5,7 @@
         {{ note.title }}
       </h2>
       <div class="note__actions">
-        <Pencil class="note__actions--edit" />
+        <!-- <Pencil class="note__actions--edit" /> -->
         <Delete class="note__actions--delete" @click="onDeleteNote(note.id)" />
       </div>
     </div>

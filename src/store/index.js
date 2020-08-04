@@ -22,7 +22,6 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchNotes({ commit }) {
-      console.log("fetching notes");
       const notes = (await localStorage.getItem("notes"))
         ? localStorage.getItem("notes")
         : [];

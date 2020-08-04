@@ -1,0 +1,12 @@
+[x] can change theme
+[] responsive
+[] can search a note by title
+[] can filter notes by start date && end date
+[] can sort notes by date asc && desc
+[x] can add a note
+[x] can delete a note
+[] can update a note
+    []prepopulate note data to be updated into modal
+    []update only preferred fields
+[] form validations
+[] animations

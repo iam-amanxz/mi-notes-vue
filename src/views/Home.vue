@@ -46,11 +46,14 @@ export default {
 
 <style lang="scss">
 .home {
-  min-height: 100vh;
+  height: 100%;
+  position: relative;
+  padding-bottom: 40px;
 }
 
 .home__container {
   max-width: 800px;
+  height: 100%;
   width: 90%;
   margin: 0 auto;
 }

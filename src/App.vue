@@ -20,6 +20,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  // overflow: hidden;
+  min-height: 100vh;
+}
 // Theme
 // #E1357D #E85C0E
 // #1AC7BC #3DD74C
