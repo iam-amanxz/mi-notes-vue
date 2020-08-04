@@ -73,8 +73,8 @@ export default {
       this.isModalOpen = true;
     },
     hideModal() {
-      this.$modal.hide("addNote");
       this.isModalOpen = false;
+      this.$modal.hide("addNote");
     },
     onSubmitForm() {
       this.loading = true;
@@ -88,10 +88,11 @@ export default {
 
         this.$store.dispatch("addNote", note);
         this.loading = false;
+        (this.title = ""), (this.description = "");
+        this.$modal.hide("addNote");
         this.isModalOpen = false;
-        (this.title = ""), (this.description = ""), this.$modal.hide("addNote");
       } else {
-        this.loading = true;
+        this.loading = false;
         this.isModalOpen = false;
       }
     },

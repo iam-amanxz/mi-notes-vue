@@ -30,7 +30,7 @@ export default {
     },
     filteredNotes() {
       return this.notes.filter((note) => {
-        return note.title.match(this.search);
+        return note.title.toLowerCase().match(this.search.toLowerCase());
       });
     },
   },

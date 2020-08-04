@@ -1,6 +1,8 @@
 <template>
   <div class="note">
-    <div v-if="isModalOpen" class="backdrop--overlay"></div>
+    <div>
+      <!-- <div v-if="isEditModalOpen === true" class="backdrop--overlay" /> -->
+    </div>
     <div class="note__header">
       <h2 class="note__title" :style="{ color: `${theme.primary}` }">{{ note.title }}</h2>
       <div class="note__actions">
@@ -67,16 +69,16 @@ export default {
     title: "",
     description: "",
     isLoading: false,
-    isModalOpen: false,
+    // isEditModalOpen: false,
   }),
   methods: {
     showModal() {
       this.$modal.show("editNote");
-      this.isModalOpen = true;
+      // this.isEditModalOpen = true;
     },
     hideModal() {
+      // this.isEditModalOpen = false;
       this.$modal.hide("editNote");
-      this.isModalOpen = false;
     },
     onDeleteNote(id) {
       this.$store.dispatch("deleteNote", id);
@@ -93,11 +95,11 @@ export default {
 
         this.$store.dispatch("updateNote", updatedNote);
         this.loading = false;
-        this.isModalOpen = false;
         this.$modal.hide("editNote");
+        // this.isEditModalOpen = false;
       } else {
-        this.loading = true;
-        this.isModalOpen = false;
+        this.loading = false;
+        // this.isEditModalOpen = false;
       }
     },
   },

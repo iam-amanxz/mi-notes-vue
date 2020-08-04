@@ -1,5 +1,5 @@
 [x] can change theme
-[] responsive
+[x] responsive
 [x] can search a note by title
 [] can filter notes by start date && end date
 [] can sort notes by date asc && desc
