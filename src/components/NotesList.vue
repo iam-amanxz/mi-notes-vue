@@ -4,6 +4,10 @@
       <note :note="note" />
     </div>
   </div>
+  <div v-else>
+    <p class="empty">Your notes list is empty.</p>
+    <p style="text-align: center">🙄</p>
+  </div>
 </template>
 
 <script>
@@ -18,4 +22,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.empty {
+  font-size: 22px;
+  color: #fff;
+  margin-top: 200px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+</style>
