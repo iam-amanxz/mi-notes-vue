@@ -2,11 +2,16 @@
   <div class="actionBar">
     <div v-if="isModalOpen" class="backdrop--overlay"></div>
     <!-- Filterbar -->
-    <!-- <FilterBar /> -->
-    <div class="filterBar"></div>
+
+    <FilterBar />
+
     <!-- Add Button -->
     <!-- TODO: Add an icon -->
-    <button class="addButton" :style="{ color: `${theme.primary}` }" @click="showAddModal">
+    <button
+      class="addButton"
+      :style="{ color: `${theme.primary}` }"
+      @click="showAddModal"
+    >
       <Plus class="addButton__icon" />Add a note
     </button>
     <modal
@@ -18,7 +23,9 @@
       width="90%"
       :adaptive="true"
     >
-      <h3 class="modal__title" :style="{ color: `${theme.primary}` }">Create a note</h3>
+      <h3 class="modal__title" :style="{ color: `${theme.primary}` }">
+        Create a note
+      </h3>
       <form class="form" @submit.prevent="onSubmitForm">
         <input
           v-model="title"
@@ -43,7 +50,9 @@
             type="submit"
             class="btn--submit formBtn"
             :style="{ background: `${theme.primary}` }"
-          >Create</button>
+          >
+            Create
+          </button>
         </div>
       </form>
     </modal>
@@ -100,7 +109,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .backdrop--overlay {
   position: absolute;
   left: 0;
@@ -114,8 +123,17 @@ export default {
 .actionBar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .actionBar {
+    flex-direction: column;
+  }
+  .addButton {
+    margin-top: 15px;
+  }
 }
 
 .addButton {

@@ -4,9 +4,11 @@
       <!-- <div v-if="isEditModalOpen === true" class="backdrop--overlay" /> -->
     </div>
     <div class="note__header">
-      <h2 class="note__title" :style="{ color: `${theme.primary}` }">{{ note.title }}</h2>
+      <h2 class="note__title" :style="{ color: `${theme.primary}` }">
+        {{ note.title }}
+      </h2>
       <div class="note__actions">
-        <Pencil class="note__actions--edit" @click="showModal" />
+        <!-- <Pencil class="note__actions--edit" @click="showModal()" /> -->
         <Delete class="note__actions--delete" @click="onDeleteNote(note.id)" />
       </div>
     </div>
@@ -17,7 +19,7 @@
     </small>
 
     <!-- Modal -->
-    <modal
+    <!-- <modal
       styles="padding: 20px 40px"
       class="editNoteModal"
       :clickToClose="false"
@@ -27,19 +29,17 @@
       :adaptive="true"
     >
       <h3 class="modal__title" :style="{ color: `${theme.primary}` }">Edit note</h3>
-      <form class="form" @submit.prevent="onEditForm(note)">
+      <form class="form" @submit.prevent="onEditForm()">
         <input
-          v-model="note.title"
           required
-          placeholder="Title..."
+          :placeholder="note.title"
           type="text"
           class="form__title formInput"
           :style="{ borderColor: `${theme.primary}` }"
         />
         <textarea
-          v-model="note.description"
           required
-          placeholder="Description..."
+          :placeholder="note.description"
           cols="10"
           rows="3"
           class="form__description formInput"
@@ -54,7 +54,7 @@
           >Save</button>
         </div>
       </form>
-    </modal>
+    </modal> -->
   </div>
 </template>
 
@@ -65,42 +65,43 @@ import Delete from "vue-material-design-icons/Delete";
 export default {
   components: { Pencil, Delete },
   props: ["note"],
-  data: () => ({
-    title: "",
-    description: "",
-    isLoading: false,
-    // isEditModalOpen: false,
-  }),
+  data() {
+    return {
+      // title: "",
+      // description: "",
+      // isLoading: false,
+      // isEditModalOpen: false,
+    };
+  },
   methods: {
     showModal() {
-      this.$modal.show("editNote");
+      // this.$modal.show("editNote");
       // this.isEditModalOpen = true;
     },
     hideModal() {
       // this.isEditModalOpen = false;
-      this.$modal.hide("editNote");
+      // this.$modal.hide("editNote");
     },
     onDeleteNote(id) {
       this.$store.dispatch("deleteNote", id);
     },
-    onEditForm(note) {
-      this.loading = true;
-      if (this.note.title !== "" && this.note.description !== "") {
-        const updatedNote = {
-          id: note.id,
-          title: note.title,
-          description: note.description,
-          modifiedAt: new Date().toISOString(),
-        };
-
-        this.$store.dispatch("updateNote", updatedNote);
-        this.loading = false;
-        this.$modal.hide("editNote");
-        // this.isEditModalOpen = false;
-      } else {
-        this.loading = false;
-        // this.isEditModalOpen = false;
-      }
+    onEditForm() {
+      // this.loading = true;
+      // if (this.editedTitle !== "" && this.editedDescription !== "") {
+      //   const updatedNote = {
+      //     id: this.note.id,
+      //     title: this.editedTitle,
+      //     description: this.editedDescription,
+      //     modifiedAt: new Date().toISOString(),
+      //   };
+      //   this.$store.dispatch("updateNote", updatedNote);
+      //   this.loading = false;
+      //   this.$modal.hide("editNote");
+      //   // this.isEditModalOpen = false;
+      // } else {
+      //   this.loading = false;
+      //   // this.isEditModalOpen = false;
+      // }
     },
   },
   computed: {

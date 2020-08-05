@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="searchBar" v-if="notes.length > 1">
-      <input type="text" class="searchInput" placeholder="Search..." v-model="search" />
+      <input
+        type="text"
+        class="searchInput"
+        placeholder="Search..."
+        v-model="search"
+      />
     </div>
     <div class="notesList" v-if="notes.length > 0">
       <div v-for="note in filteredNotes" :key="note.id">
